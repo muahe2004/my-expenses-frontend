@@ -9,19 +9,16 @@ export const SPECIAL_COLORS = {
     secondary: "#212121",
     white: '#FFFFFF',
     red: '#EE5F5F',
+    borderColor: "#2e2e2e"
 }
 
 const theme = createTheme({
     palette: {
         background: {
-            default: SPECIAL_COLORS.secondary,
+            default: SPECIAL_COLORS.primary,
             paper: '#FFFFFF',
         },
         primary: {
-            main: SPECIAL_COLORS.primary,
-            contrastText: SPECIAL_COLORS.white,
-        },
-        secondary: {
             main: SPECIAL_COLORS.secondary,
             contrastText: SPECIAL_COLORS.white,
         },
@@ -38,7 +35,6 @@ const theme = createTheme({
         fontFamily: 'Noto Sans, sans-serif',
         fontSize: 14,
         fontWeightRegular: 400,
-        
         h1: {
             fontSize: 48,
             // [`@media (max-width:780px)`]: {

@@ -3,6 +3,7 @@ import HomePage from './pages/HomePage'
 import DashBoard from './pages/DashBoard'
 import { ROUTES } from './constants/routes'
 import ProtectedRoute from './components/ProtectedRoute'
+import Layout from './components/Layout'
 
 function App() {
   return (
@@ -10,7 +11,9 @@ function App() {
       <Routes>
         <Route path={ROUTES.home} element={<HomePage />} />
         <Route element={<ProtectedRoute />}>
-          <Route path={ROUTES.dashboard} element={<DashBoard />} />
+          <Route element={<Layout />}>
+            <Route path={ROUTES.dashboard} element={<DashBoard />} />
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>
