@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router'
 import Button from '../components/Button'
 import { ROUTES } from '../constants/routes'
-import { API_URL, saveAccessToken } from '../auth/auth'
+import { API_URL, checkAuthentication } from '../auth/auth'
 
 import googleIcon from '/google.png'
 
@@ -14,21 +14,16 @@ function App() {
   const oauthError = new URLSearchParams(window.location.search).get('error')
 
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search)
-    const token = params.get('token')
-
     if (oauthError) {
       window.history.replaceState({}, document.title, window.location.pathname)
       return
     }
 
-    if (!token) {
-      return
-    }
-
-    saveAccessToken(token)
-    window.history.replaceState({}, document.title, window.location.pathname)
-    navigate(ROUTES.dashboard, { replace: true })
+    checkAuthentication().then((authenticated) => {
+      if (authenticated) {
+        navigate(ROUTES.dashboard, { replace: true })
+      }
+    })
   }, [navigate, oauthError])
 
   function handleGoogleLogin() {
