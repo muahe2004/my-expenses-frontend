@@ -4,6 +4,7 @@ import DashBoard from './pages/DashBoard'
 import { ROUTES } from './constants/routes'
 import ProtectedRoute from './components/ProtectedRoute'
 import Layout from './components/Layout'
+import Expenses from './pages/Expenses'
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route element={<ProtectedRoute />}>
           <Route element={<Layout />}>
             <Route path={ROUTES.dashboard} element={<DashBoard />} />
+            <Route path={ROUTES.expenses} element={<Expenses />} />
           </Route>
         </Route>
       </Routes>

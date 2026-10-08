@@ -19,7 +19,7 @@ export default function Sidebar({ mobileOpen, onClose, collapsed, onToggle }: Si
         <Box sx={{ width: collapsed ? collapsedWidth : drawerWidth, height: '100%', bgcolor: SPECIAL_COLORS.primary, transition: 'width 220ms ease-in-out' }}>
         <List sx={{ px: 1.5, mt: 4 }}>
             <NavItem collapsed={collapsed} to={ROUTES.dashboard} label="Dashboard" icon={<DashboardRoundedIcon />} />
-            <NavItem collapsed={collapsed} to="/expenses" label="Expenses" icon={<ReceiptLongRoundedIcon />} />
+            <NavItem collapsed={collapsed} to={ROUTES.expenses} label="Expenses" icon={<ReceiptLongRoundedIcon />} />
             <NavItem collapsed={collapsed} to="/settings" label="Settings" icon={<SettingsRoundedIcon />} />
         </List>
 
