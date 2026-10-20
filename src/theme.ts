@@ -11,14 +11,17 @@ export const SPECIAL_COLORS = {
     actionColor: "#2C67C5",
     white: '#FFFFFF',
     red: '#EE5F5F',
-    borderColor: "#2e2e2e"
+    borderColor: "#2e2e2e",
+    inputBackground: "#1b1b1b",
+    inputBorder: "#494949"
 }
 
 const theme = createTheme({
     palette: {
         background: {
+            // for MUI component
             default: SPECIAL_COLORS.primary,
-            paper: '#FFFFFF',
+            // paper: '#FFFFFF',
         },
         primary: {
             main: SPECIAL_COLORS.primary,
@@ -51,10 +54,19 @@ const theme = createTheme({
         }
     },
     components: {
+        MuiCssBaseline: {
+            styleOverrides: {
+                // for body off web
+                body: {
+                    backgroundColor: SPECIAL_COLORS.primary,
+                },
+            },
+        },
         MuiTableContainer: {
             styleOverrides: {
                 root: {
-                    backgroundColor: SPECIAL_COLORS.secondary,
+                    backgroundColor: SPECIAL_COLORS.primary,
+                    border: `1px solid ${SPECIAL_COLORS.borderColor}`,
                 },
             },
         },
@@ -68,7 +80,7 @@ const theme = createTheme({
         MuiTableCell: {
             styleOverrides: {
                 root: {
-                    borderBottom: `1px solid ${SPECIAL_COLORS.borderColor}`,
+                    borderBottom: `2px solid ${SPECIAL_COLORS.borderColor}`,
                 },
             },
         },
@@ -83,28 +95,82 @@ const theme = createTheme({
             styleOverrides: {
                 paper: {
                     backgroundColor: SPECIAL_COLORS.primary,
-                    border: `1px solid ${SPECIAL_COLORS.borderColor}`,
+                    border: `2px solid ${SPECIAL_COLORS.borderColor}`,
+                    boxShadow: '0 8px 24px rgba(90, 90, 90, 0.28)',
                 },
             },
         },
         MuiOutlinedInput: {
             styleOverrides: {
                 root: {
-                    backgroundColor: SPECIAL_COLORS.secondary,
+                    backgroundColor: SPECIAL_COLORS.inputBackground,
+                    '& .MuiOutlinedInput-notchedOutline': {
+                        borderColor: SPECIAL_COLORS.inputBorder,
+                    },
+                    '&:hover .MuiOutlinedInput-notchedOutline': {
+                        borderColor: SPECIAL_COLORS.inputBorder,
+                    },
+                    '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                        borderColor: SPECIAL_COLORS.inputBorder,
+                        borderWidth: '1px',
+                    },
                 },
             },
         },
         MuiFilledInput: {
             styleOverrides: {
                 root: {
-                    backgroundColor: SPECIAL_COLORS.secondary,
+                    backgroundColor: SPECIAL_COLORS.inputBackground,
+                    '&:before': {
+                        borderBottomColor: SPECIAL_COLORS.inputBorder,
+                    },
+                    '&:hover:before': {
+                        borderBottomColor: SPECIAL_COLORS.inputBorder,
+                    },
+                    '&.Mui-focused:before': {
+                        borderBottomColor: SPECIAL_COLORS.inputBorder,
+                    },
                 },
             },
         },
         MuiInput: {
             styleOverrides: {
                 root: {
+                    backgroundColor: SPECIAL_COLORS.inputBackground,
+                    '&:before': {
+                        borderBottomColor: SPECIAL_COLORS.inputBorder,
+                    },
+                    '&:hover:before': {
+                        borderBottomColor: SPECIAL_COLORS.inputBorder,
+                    },
+                    '&.Mui-focused:before': {
+                        borderBottomColor: SPECIAL_COLORS.inputBorder,
+                    },
+                },
+            },
+        },
+        MuiMenu: {
+            styleOverrides: {
+                paper: {
                     backgroundColor: SPECIAL_COLORS.secondary,
+                    color: SPECIAL_COLORS.white,
+                    border: `2px solid ${SPECIAL_COLORS.borderColor}`,
+                    backgroundImage: 'none',
+                },
+            },
+        },
+        MuiMenuItem: {
+            styleOverrides: {
+                root: {
+                    '&:hover': {
+                        backgroundColor: SPECIAL_COLORS.third,
+                    },
+                    '&.Mui-selected': {
+                        backgroundColor: SPECIAL_COLORS.third,
+                    },
+                    '&.Mui-selected:hover': {
+                        backgroundColor: SPECIAL_COLORS.third,
+                    },
                 },
             },
         },

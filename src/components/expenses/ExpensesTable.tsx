@@ -69,15 +69,17 @@ export default function ExpensesTable({ search = '' }: ExpensesTableProps) {
       <Box sx={{ flex: 1, minHeight: 0, overflow: 'auto' }}>
       <Table stickyHeader sx={{ tableLayout: 'fixed', width: '100%' }}>
         <colgroup>
-          <col style={{ width: '14%' }} />
-          <col style={{ width: '14%' }} />
-          <col style={{ width: '15%' }} />
-          <col style={{ width: '38%' }} />
+          <col style={{ width: '20%' }} />
           <col style={{ width: '12%' }} />
-          <col style={{ width: '7%' }} />
+          <col style={{ width: '12%' }} />
+          <col style={{ width: '14%' }} />
+          <col style={{ width: '24%' }} />
+          <col style={{ width: '12%' }} />
+          <col style={{ width: '6%' }} />
         </colgroup>
         <TableHead sx={{ backgroundColor: '#151b23' }}>
           <TableRow>
+            <TableCell sx={{ fontWeight: 700, backgroundColor: '#151b23' }}>Transaction ID</TableCell>
             <TableCell align="right" sx={{ fontWeight: 700, backgroundColor: '#151b23' }}>Amount</TableCell>
             <TableCell align="right" sx={{ fontWeight: 700, backgroundColor: '#151b23' }}>Balance</TableCell>
             <TableCell sx={{ fontWeight: 700, backgroundColor: '#151b23' }}>Category</TableCell>
@@ -89,12 +91,15 @@ export default function ExpensesTable({ search = '' }: ExpensesTableProps) {
         <TableBody>
           {filteredTransactions.length === 0 ? (
             <TableRow>
-              <TableCell colSpan={6} align="center" sx={{ py: 6 }}>
+              <TableCell colSpan={7} align="center" sx={{ py: 6 }}>
                 <Typography color="text.secondary">No transactions found.</Typography>
               </TableCell>
             </TableRow>
           ) : filteredTransactions.map((transaction) => (
             <TableRow key={transaction.id} hover>
+              <TableCell title={transaction.transaction_id} sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                {transaction.transaction_id}
+              </TableCell>
               <TableCell align="right" sx={{ color: transaction.transaction_type === 'DEBIT' ? 'error.main' : 'success.main', fontWeight: 600 }}>
                 {formatAmount(transaction.amount)}
               </TableCell>

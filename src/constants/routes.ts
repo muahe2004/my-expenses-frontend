@@ -1,5 +1,6 @@
 export const ROUTES = {
   home: '/',
   dashboard: '/dashboard',
-  expenses: "/expenses"
+  expenses: "/expenses",
+  settings: "/settings"
 } as const

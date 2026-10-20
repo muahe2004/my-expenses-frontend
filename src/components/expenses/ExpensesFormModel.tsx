@@ -10,7 +10,7 @@ interface Props { transaction: Transaction | null; onClose: () => void }
 export default function ExpensesFormModel({ transaction, onClose }: Props) {
   const queryClient = useQueryClient()
   const update = useUpdateTransaction()
-  const categories = useQuery({ queryKey: ['categories'], queryFn: getCategories })
+  const categories = useQuery({ queryKey: ['categories'], queryFn: () => getCategories(undefined, false) })
   const [description, setDescription] = useState('')
   const [categoryId, setCategoryId] = useState('')
 
