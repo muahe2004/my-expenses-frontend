@@ -16,7 +16,7 @@ export { drawerWidth, collapsedWidth }
 
 export default function Sidebar({ mobileOpen, onClose, collapsed, onToggle }: SidebarProps) {
     const content = (
-        <Box sx={{ width: collapsed ? collapsedWidth : drawerWidth, height: '100%', bgcolor: SPECIAL_COLORS.primary, transition: 'width 220ms ease-in-out' }}>
+        <Box sx={{ width: '100%', height: '100%', bgcolor: SPECIAL_COLORS.primary }}>
         <List sx={{ px: 1.5, mt: 4 }}>
             <NavItem collapsed={collapsed} to={ROUTES.dashboard} label="Dashboard" icon={<DashboardRoundedIcon />} />
             <NavItem collapsed={collapsed} to={ROUTES.expenses} label="Expenses" icon={<ReceiptLongRoundedIcon />} />
@@ -28,7 +28,7 @@ export default function Sidebar({ mobileOpen, onClose, collapsed, onToggle }: Si
 
     return (
         <>
-            <Drawer variant="temporary" open={mobileOpen} onClose={onClose} ModalProps={{ keepMounted: true }} sx={{ display: { xs: 'block', md: 'none' } }}>{content}</Drawer><Drawer variant="permanent" open sx={{ display: { xs: 'none', md: 'block' }, '& .MuiDrawer-paper': { width: collapsed ? collapsedWidth : drawerWidth, borderRight: `1px solid ${SPECIAL_COLORS.borderColor}`, transition: 'width 220ms ease-in-out' } }}>{content}
+            <Drawer variant="temporary" open={mobileOpen} onClose={onClose} ModalProps={{ keepMounted: true }} sx={{ display: { xs: 'block', md: 'none' }, '& .MuiDrawer-paper': { width: collapsed ? collapsedWidth : drawerWidth, overflowX: 'hidden' } }}>{content}</Drawer><Drawer variant="permanent" open sx={{ display: { xs: 'none', md: 'block' }, '& .MuiDrawer-paper': { width: collapsed ? collapsedWidth : drawerWidth, overflowX: 'hidden', borderRight: `1px solid ${SPECIAL_COLORS.borderColor}`, transition: 'width 220ms ease-in-out' } }}>{content}
                 <Box 
                     className="caocaicc" 
                     sx={{ 

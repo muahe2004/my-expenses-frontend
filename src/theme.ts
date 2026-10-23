@@ -11,9 +11,11 @@ export const SPECIAL_COLORS = {
     actionColor: "#2C67C5",
     white: '#FFFFFF',
     red: '#EE5F5F',
+    green: "#2e7d32",
+    blue: "#2C67C5",
     borderColor: "#2e2e2e",
     inputBackground: "#1b1b1b",
-    inputBorder: "#494949"
+    inputBorder: "#494949",
 }
 
 const theme = createTheme({
@@ -87,7 +89,14 @@ const theme = createTheme({
         MuiSvgIcon: {
             styleOverrides: {
                 root: {
-                    color: SPECIAL_COLORS.actionColor,
+                    color: 'currentColor',
+                },
+            },
+        },
+        MuiSelect: {
+            styleOverrides: {
+                icon: {
+                    color: 'currentColor',
                 },
             },
         },
@@ -152,9 +161,10 @@ const theme = createTheme({
         MuiMenu: {
             styleOverrides: {
                 paper: {
-                    backgroundColor: SPECIAL_COLORS.secondary,
+                    backgroundColor: SPECIAL_COLORS.primary,
                     color: SPECIAL_COLORS.white,
                     border: `2px solid ${SPECIAL_COLORS.borderColor}`,
+                    boxShadow: '0 8px 24px rgba(90, 90, 90, 0.28)',
                     backgroundImage: 'none',
                 },
             },

@@ -3,6 +3,34 @@ import { apiClient } from './client'
 export const TRANSACTIONS_ENDPOINT = '/transactions'
 export const SYNC_TRANSACTIONS_ENDPOINT = '/sync-transactions'
 
+export interface CategoryStatistics {
+  category_id: string | null
+  name: string
+  type: 'income' | 'expense' | null
+  status: 'active' | 'inactive' | null
+  count: number | null
+  transactions: Transaction[] | null
+}
+
+export interface StatisticsData {
+  start_date: string
+  end_date: string
+  total_expense: string
+  total_income: string
+  categories: CategoryStatistics[]
+}
+
+export interface StatisticsResponse {
+  data: StatisticsData
+}
+
+export async function getTransactionStatistics(startDate: string, endDate: string): Promise<StatisticsResponse> {
+  const response = await apiClient.get<StatisticsResponse>(`${TRANSACTIONS_ENDPOINT}/statistics`, {
+    params: { start_date: startDate, end_date: endDate },
+  })
+  return response.data
+}
+
 export type TransactionType = 'DEBIT' | 'CREDIT'
 
 export interface Transaction {
