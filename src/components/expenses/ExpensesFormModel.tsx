@@ -54,7 +54,15 @@ export default function ExpensesFormModel({ transaction, onClose }: Props) {
         {update.isError && <Alert severity="error">Unable to save changes.</Alert>}
       </Stack>
     </DialogContent>
-    <DialogActions><Button onClick={onClose}>Cancel</Button><Button onClick={handleSubmit} variant="contained" disabled={update.isPending}>Save</Button></DialogActions>
+    <DialogActions>
+      <Button
+        onClick={onClose}
+        variant="outlined"
+      >
+        Cancel
+      </Button>
+      <Button onClick={handleSubmit} variant="contained" disabled={update.isPending}>Save</Button>
+    </DialogActions>
   </Dialog>
 }
 

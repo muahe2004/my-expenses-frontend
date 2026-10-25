@@ -76,6 +76,21 @@ const theme = createTheme({
                         },
                     },
                 },
+                contained: {
+                    backgroundColor: SPECIAL_COLORS.blue,
+                    color: SPECIAL_COLORS.white,
+                    '&:hover': {
+                        backgroundColor: '#1f55aa',
+                    },
+                },
+                outlined: {
+                    color: SPECIAL_COLORS.white,
+                    borderColor: '#777',
+                    '&:hover': {
+                        borderColor: SPECIAL_COLORS.white,
+                        backgroundColor: 'rgba(255,255,255,0.08)',
+                    },
+                },
             },
         },
         MuiCssBaseline: {

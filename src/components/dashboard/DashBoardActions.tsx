@@ -28,7 +28,7 @@ export default function DashBoardActions({ statistics, selectedType, onSelectTyp
   const cards = [
     { label: 'Income', value: formatMoney(income), color: SPECIAL_COLORS.green, transactionType: 'CREDIT' as const },
     { label: 'Expenses', value: formatMoney(expenses), color: SPECIAL_COLORS.red, transactionType: 'DEBIT' as const },
-    { label: 'Balance', value: formatMoney(income - expenses), color: SPECIAL_COLORS.blue },
+    { label: 'Total Flow', value: formatMoney(Math.abs(income) + Math.abs(expenses)), color: SPECIAL_COLORS.blue },
     { label: 'Transactions', value: formatCount.format(transactions), color: '#65CDE4' },
   ]
 

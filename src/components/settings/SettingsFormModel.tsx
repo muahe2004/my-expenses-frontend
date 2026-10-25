@@ -69,7 +69,7 @@ export default function SettingsFormModel({ category, open, onClose }: { categor
         </Stack>
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose}>Cancel</Button>
+        <Button onClick={onClose} variant="outlined">Cancel</Button>
         <Button onClick={submit} variant="contained" disabled={update.isPending || create.isPending}>Save</Button>
       </DialogActions>
     </Dialog>

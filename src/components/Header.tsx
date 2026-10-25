@@ -30,6 +30,7 @@ export default function Header(_: HeaderProps) {
                 open={Boolean(anchorEl)}
                 onClose={() => setAnchorEl(null)}
             >
+                <MenuItem onClick={() => { setAnchorEl(null); navigate('/profile') }}>Profile</MenuItem>
                 <MenuItem onClick={handleLogout}>Logout</MenuItem>
             </Menu>
         </AppBar>
