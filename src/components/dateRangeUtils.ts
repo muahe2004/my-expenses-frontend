@@ -1,4 +1,14 @@
-export type DateRangePreset = 'today' | 'this-week' | 'last-week' | 'this-month' | 'last-month' | 'custom'
+export const DATE_RANGE_PRESET = {
+  TODAY: 'today',
+  YESTERDAY: 'yesterday',
+  THIS_WEEK: 'this-week',
+  LAST_WEEK: 'last-week',
+  THIS_MONTH: 'this-month',
+  LAST_MONTH: 'last-month',
+  CUSTOM: 'custom',
+} as const
+
+export type DateRangePreset = typeof DATE_RANGE_PRESET[keyof typeof DATE_RANGE_PRESET]
 
 export interface DateRangeValue {
   startDate: string
@@ -12,23 +22,27 @@ const formatLocalDate = (date: Date) => {
   return `${year}-${month}-${day}`
 }
 
-export function getPresetRange(preset: Exclude<DateRangePreset, 'custom'>, now = new Date()): DateRangeValue {
+export function getPresetRange(preset: Exclude<DateRangePreset, typeof DATE_RANGE_PRESET.CUSTOM>, now = new Date()): DateRangeValue {
   const today = new Date(now.getFullYear(), now.getMonth(), now.getDate())
   const weekday = (today.getDay() + 6) % 7
 
   switch (preset) {
-    case 'today':
+    case DATE_RANGE_PRESET.TODAY:
       return { startDate: formatLocalDate(today), endDate: formatLocalDate(today) }
-    case 'this-week':
+    case DATE_RANGE_PRESET.YESTERDAY: {
+      const yesterday = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 1)
+      return { startDate: formatLocalDate(yesterday), endDate: formatLocalDate(yesterday) }
+    }
+    case DATE_RANGE_PRESET.THIS_WEEK:
       return { startDate: formatLocalDate(new Date(today.getFullYear(), today.getMonth(), today.getDate() - weekday)), endDate: formatLocalDate(today) }
-    case 'last-week':
+    case DATE_RANGE_PRESET.LAST_WEEK:
       return {
         startDate: formatLocalDate(new Date(today.getFullYear(), today.getMonth(), today.getDate() - weekday - 7)),
         endDate: formatLocalDate(new Date(today.getFullYear(), today.getMonth(), today.getDate() - weekday - 1)),
       }
-    case 'this-month':
+    case DATE_RANGE_PRESET.THIS_MONTH:
       return { startDate: formatLocalDate(new Date(today.getFullYear(), today.getMonth(), 1)), endDate: formatLocalDate(today) }
-    case 'last-month':
+    case DATE_RANGE_PRESET.LAST_MONTH:
       return {
         startDate: formatLocalDate(new Date(today.getFullYear(), today.getMonth() - 1, 1)),
         endDate: formatLocalDate(new Date(today.getFullYear(), today.getMonth(), 0)),

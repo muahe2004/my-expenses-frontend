@@ -15,5 +15,5 @@ export function useUpdateTransaction() {
 }
 
 export function useSyncTransactions() {
-  return useMutation({ mutationFn: syncTransactions })
+  return useMutation({ mutationFn: ({ startDate, endDate }: { startDate: string; endDate: string }) => syncTransactions(startDate, endDate) })
 }

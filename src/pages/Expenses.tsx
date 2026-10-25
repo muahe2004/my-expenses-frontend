@@ -1,24 +1,32 @@
 import { useState } from 'react'
 import { useQueryClient } from '@tanstack/react-query'
-import { Box, Button, TextField } from '@mui/material'
-import SyncRoundedIcon from '@mui/icons-material/SyncRounded'
+import { Alert, Box, TextField } from '@mui/material'
 import ExpensesTable from "../components/expenses/ExpensesTable";
+import SynnTransactionActions from '../components/expenses/SynnTransactionActions'
+import { DATE_RANGE_PRESET, getPresetRange, type DateRangeValue } from '../components/dateRangeUtils'
 import { useSyncTransactions } from '../hooks/useTransactions'
 
 export default function Expenses() {
     const [search, setSearch] = useState('')
     const [searchInput, setSearchInput] = useState('')
+    const [range, setRange] = useState<DateRangeValue>(() => getPresetRange(DATE_RANGE_PRESET.YESTERDAY))
     const queryClient = useQueryClient()
     const sync = useSyncTransactions()
 
-    const handleSync = async () => {
-        await sync.mutateAsync()
-        await queryClient.invalidateQueries({ queryKey: ['transactions'] })
+    const handleSync = async (selectedRange: DateRangeValue = range) => {
+        try {
+            await sync.mutateAsync(selectedRange)
+            setRange(selectedRange)
+            await queryClient.invalidateQueries({ queryKey: ['transactions'] })
+            await queryClient.invalidateQueries({ queryKey: ['transaction-statistics'] })
+        } catch (error) {
+            console.error('Failed to sync transactions:', error)
+        }
     }
 
     return (
         <Box>
-            <Box sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: 2, mb: 3 }}>
+            <Box sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: 1, mb: 3 }}>
                 <TextField
                     size="small"
                     value={searchInput}
@@ -28,10 +36,9 @@ export default function Expenses() {
                     }}
                     placeholder="Search expenses..."
                 />
-                <Button variant="contained" startIcon={<SyncRoundedIcon />} onClick={handleSync} disabled={sync.isPending}>
-                    {sync.isPending ? 'Syncing...' : 'Sync transactions'}
-                </Button>
+                <SynnTransactionActions value={range} onApply={handleSync} loading={sync.isPending} />
             </Box>
+            {sync.isError && <Alert severity="error" sx={{ mb: 2 }}>Không thể đồng bộ giao dịch. Vui lòng thử lại.</Alert>}
             <ExpensesTable search={search} />
         </Box>
     )

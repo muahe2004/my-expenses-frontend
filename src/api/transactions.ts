@@ -54,8 +54,10 @@ export async function getTransactions(skip = 0, limit = 10): Promise<Transaction
   return response.data
 }
 
-export async function syncTransactions(): Promise<unknown> {
-  const response = await apiClient.post(SYNC_TRANSACTIONS_ENDPOINT)
+export async function syncTransactions(startDate: string, endDate: string): Promise<unknown> {
+  const response = await apiClient.post(SYNC_TRANSACTIONS_ENDPOINT, null, {
+    params: { start_date: startDate, end_date: endDate },
+  })
   return response.data
 }
 

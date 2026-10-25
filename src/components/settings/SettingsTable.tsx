@@ -36,7 +36,7 @@ export default function SettingsTable({ search = '' }: { search?: string }) {
             <TableCell sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} title={category.name}>{category.name}</TableCell>
             <TableCell sx={{ textTransform: 'capitalize' }}>{category.type}</TableCell>
             <TableCell sx={{ textTransform: 'capitalize' }}>{category.status}</TableCell>
-            <TableCell align="right"><IconButton aria-label={`Edit category ${category.name}`} onClick={() => setSelected(category)} size="small"><EditRoundedIcon fontSize="small" /></IconButton><IconButton aria-label={`Delete category ${category.name}`} size="small" color="error" disabled={remove.isPending} onClick={() => { if (window.confirm(`Delete ${category.name}?`)) remove.mutate(category.id) }}><DeleteRoundedIcon fontSize="small" /></IconButton></TableCell>
+            <TableCell align="right"><IconButton aria-label={`Edit category ${category.name}`} onClick={() => setSelected(category)} size="small" sx={{ color: 'text.primary' }}><EditRoundedIcon fontSize="small" /></IconButton><IconButton aria-label={`Delete category ${category.name}`} size="small" color="error" disabled={remove.isPending} onClick={() => { if (window.confirm(`Delete ${category.name}?`)) remove.mutate(category.id) }}><DeleteRoundedIcon fontSize="small" /></IconButton></TableCell>
           </TableRow>)}</TableBody>
         </Table>
       </Box>

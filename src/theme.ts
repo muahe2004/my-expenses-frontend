@@ -56,6 +56,28 @@ const theme = createTheme({
         }
     },
     components: {
+        MuiCircularProgress: {
+            styleOverrides: {
+                root: {
+                    color: SPECIAL_COLORS.blue,
+                },
+            },
+        },
+        MuiButton: {
+            styleOverrides: {
+                root: {
+                    '&.loading': {
+                        backgroundColor: SPECIAL_COLORS.primary,
+                        border: `1px solid ${SPECIAL_COLORS.borderColor}`,
+                        boxShadow: '0 8px 24px rgba(90, 90, 90, 0.28)',
+
+                        '&:hover': {
+                            backgroundColor: SPECIAL_COLORS.secondary,
+                        },
+                    },
+                },
+            },
+        },
         MuiCssBaseline: {
             styleOverrides: {
                 // for body off web
@@ -82,7 +104,7 @@ const theme = createTheme({
         MuiTableCell: {
             styleOverrides: {
                 root: {
-                    borderBottom: `2px solid ${SPECIAL_COLORS.borderColor}`,
+                    borderBottom: `1px solid ${SPECIAL_COLORS.borderColor}`,
                 },
             },
         },
@@ -90,6 +112,26 @@ const theme = createTheme({
             styleOverrides: {
                 root: {
                     color: 'currentColor',
+                },
+            },
+        },
+        MuiInputLabel: {
+            styleOverrides: {
+                root: {
+                    color: SPECIAL_COLORS.white,
+                    '&.Mui-focused': {
+                        color: SPECIAL_COLORS.white,
+                    },
+                    '&.MuiInputLabel-root.Mui-disabled': {
+                        color: SPECIAL_COLORS.white,
+                    },
+                },
+            },
+        },
+        MuiFormHelperText: {
+            styleOverrides: {
+                root: {
+                    marginLeft: 0,
                 },
             },
         },
@@ -104,7 +146,7 @@ const theme = createTheme({
             styleOverrides: {
                 paper: {
                     backgroundColor: SPECIAL_COLORS.primary,
-                    border: `2px solid ${SPECIAL_COLORS.borderColor}`,
+                    border: `1px solid ${SPECIAL_COLORS.borderColor}`,
                     boxShadow: '0 8px 24px rgba(90, 90, 90, 0.28)',
                 },
             },
@@ -116,7 +158,7 @@ const theme = createTheme({
                     '& .MuiOutlinedInput-notchedOutline': {
                         borderColor: SPECIAL_COLORS.inputBorder,
                     },
-                    '&:hover .MuiOutlinedInput-notchedOutline': {
+                    '&:not(.Mui-disabled):hover .MuiOutlinedInput-notchedOutline': {
                         borderColor: SPECIAL_COLORS.inputBorder,
                     },
                     '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
@@ -163,7 +205,7 @@ const theme = createTheme({
                 paper: {
                     backgroundColor: SPECIAL_COLORS.primary,
                     color: SPECIAL_COLORS.white,
-                    border: `2px solid ${SPECIAL_COLORS.borderColor}`,
+                    border: `1px solid ${SPECIAL_COLORS.borderColor}`,
                     boxShadow: '0 8px 24px rgba(90, 90, 90, 0.28)',
                     backgroundImage: 'none',
                 },

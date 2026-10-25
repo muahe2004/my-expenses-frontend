@@ -119,6 +119,7 @@ export default function ExpensesTable({ search = '' }: ExpensesTableProps) {
                   aria-label={`Edit transaction ${transaction.transaction_id}`}
                   onClick={() => setSelectedTransaction(transaction)}
                   size="small"
+                  sx={{ color: 'text.primary' }}
                 >
                   <EditRoundedIcon fontSize="small" />
                 </IconButton>
