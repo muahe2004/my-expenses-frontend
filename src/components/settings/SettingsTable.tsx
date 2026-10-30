@@ -23,7 +23,7 @@ export default function SettingsTable({ search = '' }: { search?: string }) {
   const visibleCategories = filteredCategories.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
   return (
     <TableContainer component={Paper} sx={{ maxHeight: '63vh', borderRadius: 3, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
-      <Box sx={{ flex: 1, minHeight: 0, overflow: 'auto' }}>
+      <Box className="table-scroll" sx={{ flex: 1, minHeight: 0, overflow: 'auto' }}>
         <Table stickyHeader sx={{ tableLayout: 'fixed', width: '100%' }}>
           <colgroup><col style={{ width: '43%' }} /><col style={{ width: '20%' }} /><col style={{ width: '20%' }} /><col style={{ width: '17%' }} /></colgroup>
           <TableHead sx={{ backgroundColor: '#151b23' }}><TableRow>

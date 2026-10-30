@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useQueryClient } from '@tanstack/react-query'
 import {
   Alert,
   Avatar,
@@ -14,7 +15,14 @@ import {
 import EditRoundedIcon from '@mui/icons-material/EditRounded'
 import { getCurrentUser, updateCurrentUser, type UserProfile, type UserProfileUpdate } from '../api/users'
 
+const CURRENCIES = [
+  { value: 'VND', label: 'VND — Vietnamese đồng' },
+  { value: 'USD', label: 'USD — US dollar' },
+  { value: 'EUR', label: 'EUR — Euro' },
+]
+
 export default function Profile() {
+  const queryClient = useQueryClient()
   const [profile, setProfile] = useState<UserProfile | null>(null)
   const [form, setForm] = useState<UserProfileUpdate>({
     full_name: '',
@@ -34,6 +42,7 @@ export default function Profile() {
       .then((user) => {
         if (!active) return
         setProfile(user)
+        queryClient.setQueryData(['current-user'], user)
         setForm({
           full_name: user.full_name ?? '',
           phone_number: user.phone_number ?? '',
@@ -67,6 +76,7 @@ export default function Profile() {
         currency: form.currency,
       })
       setProfile(user)
+      queryClient.setQueryData(['current-user'], user)
       setForm({
         full_name: user.full_name ?? '',
         phone_number: user.phone_number ?? '',
@@ -141,9 +151,9 @@ export default function Profile() {
                     <TextField label="Bank name" value={form.bank_name ?? ''} onChange={(event) => updateField('bank_name', event.target.value)} fullWidth />
                     <TextField label="Address" value={form.address ?? ''} onChange={(event) => updateField('address', event.target.value)} fullWidth sx={{ gridColumn: { xs: 'auto', sm: '1 / -1' } }} />
                     <TextField select label="Currency" value={form.currency} onChange={(event) => updateField('currency', event.target.value)} fullWidth>
-                      <MenuItem value="VND">VND — Vietnamese đồng</MenuItem>
-                      <MenuItem value="USD">USD — US dollar</MenuItem>
-                      <MenuItem value="EUR">EUR — Euro</MenuItem>
+                      {CURRENCIES.map(({ value, label }) => (
+                        <MenuItem key={value} value={value}>{label}</MenuItem>
+                      ))}
                     </TextField>
                     <TextField label="Balance" value={`${Number(profile.balance).toLocaleString('en-US')} ${profile.currency}`} disabled fullWidth />
                   </>

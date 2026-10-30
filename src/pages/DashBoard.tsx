@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query'
 import { Alert, Box, CircularProgress, Stack, Typography } from '@mui/material'
 import { getTransactionStatistics, type TransactionType } from '../api/transactions'
 import DateRange from '../components/DateRange'
-import { DATE_RANGE_PRESET, getPresetRange, type DateRangeValue } from '../components/dateRangeUtils'
+import { DATE_RANGE_PRESET, getPresetRange, type DateRangeValue } from '../utils/dateRangeUtils'
 import DashBoardActions from '../components/dashboard/DashBoardActions'
 
 const CategoryStatisticsChart = lazy(() => import('../components/dashboard/CategoryStatisticsChart'))
@@ -21,7 +21,7 @@ function DashBoard() {
             <DateRange value={range} onApply={setRange} initialPreset={DATE_RANGE_PRESET.YESTERDAY} />
 
             {isLoading && <Box sx={{ display: 'flex', justifyContent: 'center', py: 8 }}><CircularProgress /></Box>}
-            {isError && <Alert severity="error">Không thể tải thống kê. Vui lòng thử lại.</Alert>}
+            {isError && <Alert severity="error">Unable to load statistics. Please try again.</Alert>}
 
             {data && (
                 <>

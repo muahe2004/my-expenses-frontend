@@ -66,7 +66,7 @@ export default function ExpensesTable({ search = '' }: ExpensesTableProps) {
         flexDirection: 'column',
       }}
     >
-      <Box sx={{ flex: 1, minHeight: 0, overflow: 'auto' }}>
+      <Box className="table-scroll" sx={{ flex: 1, minHeight: 0, overflow: 'auto' }}>
       <Table stickyHeader sx={{ tableLayout: 'fixed', width: '100%' }}>
         <colgroup>
           <col style={{ width: '20%' }} />

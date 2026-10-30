@@ -3,7 +3,7 @@ import { useQueryClient } from '@tanstack/react-query'
 import { Alert, Box, TextField } from '@mui/material'
 import ExpensesTable from "../components/expenses/ExpensesTable";
 import SynnTransactionActions from '../components/expenses/SynnTransactionActions'
-import { DATE_RANGE_PRESET, getPresetRange, type DateRangeValue } from '../components/dateRangeUtils'
+import { DATE_RANGE_PRESET, getPresetRange, type DateRangeValue } from '../utils/dateRangeUtils'
 import { useSyncTransactions } from '../hooks/useTransactions'
 
 export default function Expenses() {
@@ -38,7 +38,7 @@ export default function Expenses() {
                 />
                 <SynnTransactionActions value={range} onApply={handleSync} loading={sync.isPending} />
             </Box>
-            {sync.isError && <Alert severity="error" sx={{ mb: 2 }}>Không thể đồng bộ giao dịch. Vui lòng thử lại.</Alert>}
+            {sync.isError && <Alert severity="error" sx={{ mb: 2 }}>Unable to sync transactions. Please try again.</Alert>}
             <ExpensesTable search={search} />
         </Box>
     )

@@ -1,5 +1,10 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
-import { getTransactions, syncTransactions, updateTransaction, type TransactionUpdate } from '../api/transactions'
+import {
+  getTransactions,
+  syncTransactions,
+  updateTransaction,
+  type TransactionUpdate,
+} from '../api/transactions'
 
 export function useTransactions(page = 0, pageSize = 10) {
   return useQuery({
@@ -10,10 +15,14 @@ export function useTransactions(page = 0, pageSize = 10) {
 
 export function useUpdateTransaction() {
   return useMutation({
-    mutationFn: ({ id, data }: { id: string; data: TransactionUpdate }) => updateTransaction(id, data),
+    mutationFn: ({ id, data }: { id: string; data: TransactionUpdate }) =>
+      updateTransaction(id, data),
   })
 }
 
 export function useSyncTransactions() {
-  return useMutation({ mutationFn: ({ startDate, endDate }: { startDate: string; endDate: string }) => syncTransactions(startDate, endDate) })
+  return useMutation({
+    mutationFn: ({ startDate, endDate }: { startDate: string; endDate: string }) =>
+      syncTransactions(startDate, endDate),
+  })
 }
